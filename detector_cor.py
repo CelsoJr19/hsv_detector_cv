@@ -1,11 +1,17 @@
 import cv2
 import numpy as np
+import serial
+import time
 
 cap = cv2.VideoCapture(0) #Abre a webcam
+
+arduino = serial.Serial('COM3', 9600) #Configura a comunicação serial com o Arduino
+time.sleep(2) #Aguarda a conexão ser estabelecida
 
 while True:
    
     ret, frame = cap.read() #Lê o frame da câmera
+    cor_detectada = False
     if not ret:
         break
 
@@ -20,13 +26,13 @@ while True:
     #Cria a máscara
     mask = cv2.inRange(hsv, lower_red, upper_red)"""
 
-    """ 
+     
     #Define o range da cor laranja no espaço HSV
     lower_orange = np.array([4, 100, 100])
     upper_orange = np.array([19, 255, 255])
 
     #Cria a máscara
-    mask = cv2.inRange(hsv, lower_orange, upper_orange)"""
+    mask = cv2.inRange(hsv, lower_orange, upper_orange)
 
     """
     #Define o range da cor amarela no espaço HSV
@@ -89,16 +95,18 @@ while True:
         if area > 500: #Ignora pequenos ruídos
             x, y, w, h = cv2.boundingRect(contour)
             frame = cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 0, 255), 2)
-            cv2.putText(frame, "Objeto Vermelho", (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0,0,255), 2)"""
+            cv2.putText(frame, "Objeto Vermelho", (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0,0,255), 2)
+            cor_detectada = True"""
 
-    """
+    
     #Desenha um retângulo ao redor do maior contorno laranja encontrado
     for contour in contours:
         area = cv2.contourArea(contour)
         if area > 500: #Ignora pequenos ruídos
             x, y, w, h = cv2.boundingRect(contour)
             frame = cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 165, 255), 2)
-            cv2.putText(frame, "Objeto Laranja", (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0,165,255), 2)"""
+            cv2.putText(frame, "Objeto Laranja", (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0,165,255), 2)
+            cor_detectada = True
     
     """
     #Desenha um retângulo ao redor do maior contorno amarelo encontrado
@@ -107,7 +115,8 @@ while True:
         if area > 500: #Ignora pequenos ruídos
             x, y, w, h = cv2.boundingRect(contour)
             frame = cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 255), 2)
-            cv2.putText(frame, "Objeto Amarelo", (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0,255,255), 2)"""
+            cv2.putText(frame, "Objeto Amarelo", (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0,255,255), 2)
+            cor_detectada = True"""
     
     """
     #Desenha um retângulo ao redor do maior contorno verde encontrado
@@ -116,7 +125,8 @@ while True:
         if area > 500: #Ignora pequenos ruídos
             x, y, w, h = cv2.boundingRect(contour)
             frame = cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
-            cv2.putText(frame, "Objeto Verde", (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0,255,0), 2)"""
+            cv2.putText(frame, "Objeto Verde", (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0,255,0), 2)
+            cor_detectada = True"""
     
     """ 
     #Desenha um retângulo ao redor do maior contorno ciano encontrado
@@ -125,7 +135,8 @@ while True:
         if area > 500: #Ignora pequenos ruídos
             x, y, w, h = cv2.boundingRect(contour)
             frame = cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 255), 2)
-            cv2.putText(frame, "Objeto Ciano", (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0,255,255), 2)"""
+            cv2.putText(frame, "Objeto Ciano", (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0,255,255), 2)
+            cor_detectada = True"""
 
     """
     #Desenha um retângulo ao redor do maior contorno azul encontrado
@@ -134,7 +145,8 @@ while True:
         if area > 500: #Ignora pequenos ruídos
             x, y, w, h = cv2.boundingRect(contour)
             frame = cv2.rectangle(frame, (x, y), (x + w, y + h), (255, 0, 0), 2)
-            cv2.putText(frame, "Objeto Azul", (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255,0,0), 2)"""
+            cv2.putText(frame, "Objeto Azul", (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255,0,0), 2)
+            cor_detectada = True"""
 
     """
     #Desenha um retângulo ao redor do maior contorno roxo encontrado
@@ -143,7 +155,8 @@ while True:
         if area > 500: #Ignora pequenos ruídos
             x, y, w, h = cv2.boundingRect(contour)
             frame = cv2.rectangle(frame, (x, y), (x + w, y + h), (255, 10, 130), 2)
-            cv2.putText(frame, "Objeto Roxo", (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255,0,255), 2)"""
+            cv2.putText(frame, "Objeto Roxo", (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255,0,255), 2)
+            cor_detectada = True"""
 
     """
     #Desenha um retângulo ao redor do maior contorno rosa encontrado
@@ -152,8 +165,15 @@ while True:
         if area > 500: #Ignora pequenos ruídos
             x, y, w, h = cv2.boundingRect(contour)
             frame = cv2.rectangle(frame, (x, y), (x + w, y + h), (255, 0, 255), 2)
-            cv2.putText(frame, "Objeto Rosa", (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255,0,255), 2)"""
+            cv2.putText(frame, "Objeto Rosa", (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255,0,255), 2)
+            cor_detectada = True"""
 
+    # Envia '1' se achou a cor, e '0' se não achou nada
+    if cor_detectada:
+        arduino.write(b'1')
+    else:
+        arduino.write(b'0')
+        
     #Mostra os resultados na tela
     cv2.imshow('Camera Original', frame)
     cv2.imshow('Mascara', mask)
