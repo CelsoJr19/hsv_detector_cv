@@ -1,4 +1,4 @@
-![alt text](hsv_detector_cv/teste.png)
+![alt text](teste.png)
 # Detector de Cores com Visão Computacional (OpenCV)
 
 Este projeto utiliza Python e a biblioteca OpenCV para detectar e rastrear cores em tempo real utilizando a webcam. O algoritmo converte as imagens para o espaço de cores HSV (Hue, Saturation, Value), o que garante uma detecção muito mais precisa e resistente a variações de iluminação do ambiente.
