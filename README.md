@@ -1,4 +1,3 @@
-![alt text](tabelaHSV.png)
 # Detector de Cores com Visão Computacional (OpenCV)
 
 Este projeto utiliza Python e a biblioteca OpenCV para detectar e rastrear cores em tempo real utilizando a webcam. O algoritmo converte as imagens para o espaço de cores HSV (Hue, Saturation, Value), o que garante uma detecção muito mais precisa e resistente a variações de iluminação do ambiente.
@@ -22,6 +21,8 @@ _pip install opencv-python numpy_
 _pip install pyserial_
 
 ### Passo 3: Edite o código para escolher a cor de detecção (retire os comentarios)
+Caso queira ajustar a detecção de cores, use a tabela abaixo e edite a variavel "lower" e "upper" da cor desejada
+![alt text](tabelaHSV.png)
 
 ### Passo 4: Rode o programa em Python e o C++ na IDE do arduino
 _python detector_cor.py_
