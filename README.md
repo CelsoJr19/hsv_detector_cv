@@ -26,9 +26,9 @@ _pip install pyserial_
 ### Passo 4: Rode o programa em Python e o C++ na IDE do arduino
 _python detector_cor.py_
 
-![alt text](teste.png)
-
 ⚠️ Atenção (Usuários de Windows 11): Se o script rodar sem erros no terminal, mas a câmera não abrir, vá em Configurações > Privacidade e segurança > Câmera e certifique-se de que a permissão de acesso à câmera está ativada para aplicativos da área de trabalho.
 Obs: Não mantenha o serial monitor aberto enquanto roda o programa .py
 
 Aperte "c" para fechar!
+
+![alt text](teste.png)
